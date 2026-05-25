@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",   // modern resolution for Vite
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "jsx": "react-jsx"               // ✅ enables JSX/TSX compilation
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

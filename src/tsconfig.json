@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",              // Modern JS output
+    "module": "ESNext",              // Use ES modules
+    "moduleResolution": "Node",      // Resolve imports like Node.js
+    "strict": true,                  // Enable strict type checking
+    "jsx": "react-jsx",              // If using React; otherwise remove
+    "esModuleInterop": true,         // Allow default imports from CommonJS
+    "skipLibCheck": true,            // Speed up builds by skipping type checks in node_modules
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist"                 // Where compiled JS goes
+  },
+  "include": ["src"],                // Compile everything inside /src
+  "exclude": ["node_modules"]        // Ignore dependencies
+}
