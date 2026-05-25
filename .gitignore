@@ -1,4 +1,8 @@
+# Ignore build outputs
 dist/
-release/
-android/
 node_modules/
+
+# Ignore Electron binaries
+electron/*.exe
+electron/*.dll
+electron/*.zip
