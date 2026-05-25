@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
 import { AlertTriangle, Shield, Globe, Activity, Clock, TrendingUp, Server, Bug } from "lucide-react";
 
 interface DashboardProps {
