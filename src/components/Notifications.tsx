@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { NotificationContext } from "../context/NotificationContext";
+import React from "react";
+import { useNotifications } from "../context/NotificationContext";
 
 const Notifications: React.FC = () => {
-  const { notifications } = useContext(NotificationContext);
+  const { notifications } = useNotifications();
 
   return (
     <section className="p-4 bg-yellow-50 border rounded">
