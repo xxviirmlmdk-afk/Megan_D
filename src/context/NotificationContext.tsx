@@ -1,80 +1,47 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useState, useContext } from "react";
 
 export interface Notification {
-  id: string;
-  type: "success" | "error" | "warning" | "info";
-  title: string;
+  id: number;
   message: string;
-  timestamp: Date;
-  read: boolean;
+  type?: "info" | "success" | "error";
 }
 
 interface NotificationContextType {
   notifications: Notification[];
-  addNotification: (type: Notification["type"], title: string, message: string) => void;
-  markAsRead: (id: string) => void;
-  markAllAsRead: () => void;
-  removeNotification: (id: string) => void;
-  clearAll: () => void;
-  unreadCount: number;
+  addNotification: (message: string, type?: "info" | "success" | "error") => void;
+  removeNotification: (id: number) => void;
 }
 
-const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
+export const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
-export function NotificationProvider({ children }: { children: ReactNode }) {
+export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  const addNotification = (type: Notification["type"], title: string, message: string) => {
-    const notification: Notification = {
-      id: Date.now().toString(),
-      type,
-      title,
+  const addNotification = (message: string, type: "info" | "success" | "error" = "info") => {
+    const newNotification: Notification = {
+      id: Date.now(),
       message,
-      timestamp: new Date(),
-      read: false
+      type,
     };
-    setNotifications(prev => [notification, ...prev].slice(0, 50));
+    setNotifications((prev) => [...prev, newNotification]);
   };
 
-  const markAsRead = (id: string) => {
-    setNotifications(prev =>
-      prev.map(n => n.id === id ? { ...n, read: true } : n)
-    );
+  const removeNotification = (id: number) => {
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
   };
-
-  const markAllAsRead = () => {
-    setNotifications(prev => prev.map(n => ({ ...n, read: true })));
-  };
-
-  const removeNotification = (id: string) => {
-    setNotifications(prev => prev.filter(n => n.id !== id));
-  };
-
-  const clearAll = () => {
-    setNotifications([]);
-  };
-
-  const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <NotificationContext.Provider value={{
-      notifications,
-      addNotification,
-      markAsRead,
-      markAllAsRead,
-      removeNotification,
-      clearAll,
-      unreadCount
-    }}>
+    <NotificationContext.Provider value={{ notifications, addNotification, removeNotification }}>
       {children}
     </NotificationContext.Provider>
   );
-}
+};
 
-export function useNotifications() {
+// 🔹 Helper hook
+export const useNotifications = (): NotificationContextType => {
   const context = useContext(NotificationContext);
   if (!context) {
     throw new Error("useNotifications must be used within a NotificationProvider");
   }
   return context;
-}
+};
