@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
-import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
+import { Button } from "../components/ui/Button";
 import { FileText, Download, FileJson, FileSpreadsheet, FileDown, BarChart3, PieChart, TrendingUp } from "lucide-react";
 import { exportToJSON, exportToCSV, generatePDFReport } from "../utils/exportUtils";
 import { useNotifications } from "../context/NotificationContext";
